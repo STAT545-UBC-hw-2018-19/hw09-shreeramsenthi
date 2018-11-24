@@ -1,20 +1,13 @@
-all: report.html
+all: scrabble_score.csv
 
 clean:
-	rm -f words.txt histogram.tsv histogram.png report.md report.html
+	rm -f scrabble_scores.csv scrabble_hist.csv
 
-report.html: report.rmd histogram.tsv histogram.png
-	Rscript -e 'rmarkdown::render("$<")'
+clean-full:
+	rm -f words.txt scrabble_score.csv scrabble_hist.csv
 
-histogram.png: histogram.tsv
-	Rscript -e 'library(ggplot2); qplot(Length, Freq, data=read.delim("$<")); ggsave("$@")'
-	rm Rplots.pdf
-
-histogram.tsv: histogram.r words.txt
+scrabble_score.csv scrabble_hist.csv: scrabble.R words.txt
 	Rscript $<
 
-words.txt: /usr/share/dict/words
-	cp $< $@
-
-# words.txt:
-#	Rscript -e 'download.file("http://svnweb.freebsd.org/base/head/share/dict/web2?view=co", destfile = "words.txt", quiet = TRUE)'
+words.txt:
+	curl -L https://svnweb.freebsd.org/base/head/share/dict/web2?view=co > words.txt

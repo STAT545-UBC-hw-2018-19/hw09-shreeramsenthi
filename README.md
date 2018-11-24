@@ -1,17 +1,11 @@
-make-activity
-=============
+# Stat547 Assignment 4: Package Development
 
-The commit history of this repository reflects what a student might do as she works through [this activity](http://stat545-ubc.github.io/automation04_make-activity.html) from [STAT 545](http://stat545-ubc.github.io). This fully developed example shows:
+This is my submission for assignment 4 of the 2018 iteration of the Stat547 course at UBC.
 
-  * How to run an R script non-interactively
-  * How to use `make`
-    - to record which files are inputs vs. intermediates vs. outputs
-    - to capture how scripts and commands convert inputs to outputs
-    - to re-run parts of an analysis that are out-of-date
-  * The intersection of R and `make`, i.e. how to
-    - run snippets of R code
-    - run an entire R script
-    - render an R Markdown document (or R script)
-  * The interface between RStudio and `make`
-  * How to use `make` from the shell
-  * How Git facilitates the process of building a pipeline
+In the last assignment in Stat545 we explored uses of the `shiny` package to build and deploy a simple interactive website to explore a dataset. In this assignment we will be practising automation through the use of GNU `make` and `Makefile`'s.
+
+Specifically, we will be starting with the base [`make` activity](https://github.com/STAT545-UBC/make-activity) provided by [Jenny Bryan](https://github.com/jennybc). From there, we were tasked with adding an R script and an Rmd file that are used to produce an output and tying it into the `make` pipeline.
+
+I chose to make an R script that creates a csv file outlining how many points each word is worth in Scrabble, as well as a csv file of the frequency data. Since the run times were getting too large, I restricted my analyses to words that are not proper nouns and begin with "a". My Rmd script produces a pdf file that summarizes these results. In addition to this, I removed the Rscript, Rmd, and intermediate files provided by Jenny.
+
+You can find my Makefile [here]() and my final report output [here]().
