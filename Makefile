@@ -1,12 +1,19 @@
-all: scrabble_score.csv
+all: report.html
 
 clean:
-	rm -f scrabble_scores.csv scrabble_hist.csv
+	rm -f scrabble_scores.csv scrabble_freq.csv histogram.png report.md
 
-clean-full:
-	rm -f words.txt scrabble_score.csv scrabble_hist.csv
+clean-full: clean
+	rm -f words.txt report.html
 
-scrabble_score.csv scrabble_hist.csv: scrabble.R words.txt
+report.html: report.Rmd histogram.png scrabble_score.csv
+	Rscript -e 'rmarkdown::render("$<")'
+
+histogram.png: scrabble_freq.csv
+	Rscript -e 'library(ggplot2); qplot(Score, Freq, data=read.csv("$<")) + theme_classic(); ggsave("$@")'
+	rm Rplots.pdf
+
+scrabble_score.csv scrabble_freq.csv: scrabble.R words.txt
 	Rscript $<
 
 words.txt:

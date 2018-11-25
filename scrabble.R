@@ -35,23 +35,28 @@ calculate_scrabble_score <- function(word){
 }
 
 # build a tibble of scores
-scrabble_score <- tibble(words = readLines("words.txt")) %>%
+scrabble_score <- tibble(Words = readLines("words.txt")) %>%
   filter(
-    startsWith(words, "a") # limit to words starting with 'a' to limit run time
+    startsWith(Words, "a") # limit to words starting with 'a' to limit run time
   ) %>%
   rowwise %>%
   mutate(
-    score = words %>% calculate_scrabble_score
+    Score = Words %>% calculate_scrabble_score
   )
 
 # Save results
 write_csv(scrabble_score, "scrabble_scores.csv")
 
-# Calculate frequency table for words < 10 letters long
-scrabble_hist <- scrabble_score %>%
-  filter(nchar(words) < 10) %>%
-  select("score") %>%
-  table()
+# Filter by word length and extract vector of scores
+Score <- scrabble_score %>%
+  filter(nchar(Words) < 10) %>%
+  `[[`("Score")
+
+# Calculate frequency scores
+scrabble_freq <- table(Score)
 
 # Save results
-write.table(scrabble_hist, "scrabble_hist.csv")
+write.table(
+  scrabble_freq, "scrabble_freq.csv",
+  sep = ",", row.names = FALSE, quote = FALSE
+)
