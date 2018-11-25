@@ -23,4 +23,4 @@ Now we're finally ready. Let's take a look at the distribution of Scrabble score
 
 ![*Fig. 1* A histogram of Scrabble scores for a subset of English words](histogram.png)
 
-Looks like `r with(hist, Score[which.max(Freq)])` points is the most common score for valid Scrabble word beginning with 'a' that is up to 9 letters long.
+Looks like `r with(hist, Score[which.max(Freq)])` points is the most common score for valid Scrabble words beginning with 'a' that up to 9 letters long.

@@ -1,4 +1,4 @@
-# Stat547 Assignment 4: Package Development
+# Stat547 Assignment 4: Automation with `make`
 
 This is my submission for assignment 4 of the 2018 iteration of the Stat547 course at UBC.
 
