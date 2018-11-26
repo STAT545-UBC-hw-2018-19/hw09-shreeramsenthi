@@ -2,7 +2,9 @@
 title: "An exploration of Scrabble Scores"
 author: Shreeram Senthivasan
 date: "`r format(Sys.time(), '%d %B, %Y')`"
-output: pdf_document
+output:
+  html_document:
+    keep_md: yes
 ---
 
 ```{r library, include = F}
@@ -17,7 +19,8 @@ To keep our run-time reasonable, let's limit our analyses to words that start wi
 
 From this we are left with a sample of `r nrow(scores)` words, which range in score from `r min(scores$Score)` to `r max(scores$Score)` points before modifiers. Yikes, that doesn't look right. Well that would probably be because this includes words up to `r max(nchar(scores$Words))` letters long! That probably isn't reasonable in a Scrabble game, so let's just look at words up to 9 letters long (since you can have 7 tiles in your hand).
 
-Now we're finally ready. Check out Figure \ref{hist} for the distribution of Scrabble scores for valid words that start with 'a' and are less than 10 letters long. Looks like `r with(hist, Score[which.max(Freq)])` points is the most common score for valid Scrabble words beginning with 'a' that are up to 9 letters long.
+Now we're finally ready. Let's take a look at the distribution of Scrabble scores for valid words that start with 'a' and are less than 10 letters long.
 
-![A histogram of Scrabble scores for a subset of English words\label{hist}](scrabble_histogram.png)
+![*Fig. 1* A histogram of Scrabble scores for a subset of English words](histogram.png)
 
+Looks like `r with(hist, Score[which.max(Freq)])` points is the most common score for valid Scrabble words beginning with 'a' that are up to 9 letters long.
