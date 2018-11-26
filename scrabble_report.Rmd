@@ -1,0 +1,23 @@
+---
+title: "An exploration of Scrabble Scores"
+author: Shreeram Senthivasan
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: pdf_document
+---
+
+```{r library, include = F}
+library(readr)
+scores <- read_csv("scrabble_scores.csv") 
+hist <- read_csv("scrabble_freq.csv")
+```
+
+Have you ever wondered what the distribution of Scrabble scores looks like for most words? Why don't we use the dictionary file provided by most Unix-based operating systems to explore this problem.
+
+To keep our run-time reasonable, let's limit our analyses to words that start with 'a' that aren't proper nouns. We will assume for the moment that these words are representative of the distributions of all words that are not proper nouns (which are invalid in Scrabble).
+
+From this we are left with a sample of `r nrow(scores)` words, which range in score from `r min(scores$Score)` to `r max(scores$Score)` points before modifiers. Yikes, that doesn't look right. Well that would probably be because this includes words up to `r max(nchar(scores$Words))` letters long! That probably isn't reasonable in a Scrabble game, so let's just look at words up to 9 letters long (since you can have 7 tiles in your hand).
+
+Now we're finally ready. Check out Figure \ref{hist} for the distribution of Scrabble scores for valid words that start with 'a' and are less than 10 letters long. Looks like `r with(hist, Score[which.max(Freq)])` points is the most common score for valid Scrabble words beginning with 'a' that are up to 9 letters long.
+
+![A histogram of Scrabble scores for a subset of English words\label{hist}](scrabble_histogram.png)
+
